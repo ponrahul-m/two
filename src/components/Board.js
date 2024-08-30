@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState} from 'react';
 import { Board} from '../helper'
 import TileView from './Tile';
 import Cell from './Cell';
