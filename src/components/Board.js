@@ -1,0 +1,91 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import ReactDOM from 'react-dom';
+import { Board} from '../helper'
+import TileView from './Tile';
+import Cell from './Cell';
+import useSwipe from '../hooks/useEvent';
+
+
+const BoardView = () => {
+  const [board, setBoard] = useState(new Board());
+  const resetGame=()=>{
+    setBoard(new Board());
+  }
+  const handleSwipe = (direction) => {
+    if (board.hasWon()) return;
+
+    let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+    
+    let newBoard;
+    switch (direction) {
+      case "left":
+        newBoard = boardClone.move(0);
+        break;
+      case "up":
+        newBoard = boardClone.move(1);
+        break;
+      case "right":
+        newBoard = boardClone.move(2);
+        break;
+      case "down":
+        newBoard = boardClone.move(3);
+        break;
+      default:
+        return;
+    }
+    setBoard(newBoard);
+  };
+
+  // Use the swipe hook
+  useSwipe(handleSwipe);
+
+  var cells = board.cells.map((row, rowIndex) => {
+    return (
+      <div key={rowIndex}>
+        { row.map((_, columnIndex) => <Cell key={rowIndex * Board.size + columnIndex} />) }
+      </div>
+    );
+  });
+  var tiles = board.tiles
+    .filter(tile => tile.value != 0)
+    .map(tile => <TileView tile={tile} key={tile.id} />);
+  return (
+    <div>
+      <div className='details-box'>
+     <div className='score-box'>Score :{board.score}</div>
+     <div className='resetButton' onClick={resetGame}>Reset-Game</div>
+     </div>
+    <div className='board'>
+      <div>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      </div>
+      <div>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      </div>
+      <div>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      </div>
+      <div>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      <span className='cell'></span>
+      </div>
+
+      {tiles}
+     
+    </div>
+    </div>
+  );
+}
+
+export default BoardView;
