@@ -96,53 +96,63 @@ html, body {
 .tile2 {
   background-color: #eee;
   background-image: url(./assets/img/2.gif);
+  background-size: contain;
 }
 
 .tile4 {
   background-color: #eec;
   background-image: url(./assets/img/4.gif);
+  background-size: contain;
 }
 
 .tile8 {
   color: #ffe;
   background-image: url(./assets/img/8.gif);
+  background-size: contain;
 }
 
 .tile16 {
   color: #ffe;
   background-image: url(./assets/img/16.gif);
+  background-size: contain;
 }
 
 .tile32 {
   color: #ffe;
   background-image: url(./assets/img/32.gif);
+  background-size: contain;
 }
 
 .tile64 {
+  background-size: contain;
   color: #ffe;
   background-image: url(./assets/img/64.gif);
 }
 
 .tile128 {
   color: #ffe;
+  background-size: contain;
   background-image: url(./assets/img/128.gif);
 }
 
 .tile256 {
   color: #ffe;
   background-image: url(./assets/img/256.gif);
+  background-size: contain;
   font-size: 45px;
 }
 
 .tile512 {
   color: #ffe;
   background-image: url(./assets/img/512.gif);
+  background-size: contain;
   font-size: 45px;
 }
 
 .tile1024 {
   color: #fff;
   background-image: url(./assets/img/1024.gif);
+  background-size: contain;
   font-size: 35px;
 }
 
