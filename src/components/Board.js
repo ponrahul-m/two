@@ -4,7 +4,6 @@ import TileView from './Tile';
 import Cell from './Cell';
 import useSwipe from '../hooks/useEvent';
 
-
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
   const [lost,setLost]=useState(false);
@@ -41,17 +40,9 @@ const BoardView = () => {
 
   // Use the swipe hook
   useSwipe(handleSwipe);
-
-  var cells = board.cells.map((row, rowIndex) => {
-    return (
-      <div key={rowIndex}>
-        { row.map((_, columnIndex) => <Cell key={rowIndex * Board.size + columnIndex} />) }
-      </div>
-    );
-  });
   var tiles = board.tiles
     .filter(tile => tile.value != 0)
-    .map(tile => <TileView tile={tile} key={tile.id} />);
+    .map((tile,index) => <TileView tile={tile} key={index} />);
   return (
     <div>
       <div className='details-box'>
