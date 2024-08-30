@@ -8,11 +8,15 @@ import useSwipe from '../hooks/useEvent';
 
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
+  const [lost,setLost]=useState(false);
   const resetGame=()=>{
     setBoard(new Board());
   }
   const handleSwipe = (direction) => {
     if (board.hasWon()) return;
+    if(board.hasLost()){
+      setLost(true);
+    }
 
     let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
     
@@ -84,6 +88,7 @@ const BoardView = () => {
       {tiles}
      
     </div>
+    {lost && <h1>You Lost</h1>}
     </div>
   );
 }
