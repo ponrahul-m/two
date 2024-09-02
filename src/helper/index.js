@@ -100,8 +100,8 @@ class Board {
           this.score += tile1.value + tile2.value;
         }
         resultRow[target] = targetTile;
-        this.won |= targetTile.value === 2048;
-        hasChanged |= targetTile.value !== this.cells[row][target].value;
+        this.won |= targetTile.value === 2048; //limit
+        hasChanged |= targetTile.value !== this.cells[row][target].value; 
       }
       this.cells[row] = resultRow;
     }
@@ -129,7 +129,7 @@ class Board {
     }
     var index = ~~(Math.random() * emptyCells.length);
     var cell = emptyCells[index];
-    var newValue = Math.random() < this.fourProbability ? 4 : 2;
+    var newValue = Math.random() < this.fourProbability ? 4 : 2; // either 4 or 2 will come
     this.cells[cell.r][cell.c] = this.addTile(newValue);
   }
   move(direction) {
