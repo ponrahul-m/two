@@ -38,7 +38,7 @@ const BoardView = () => {
     setBoard(newBoard);
   };
 
-  // Use the swipe hook
+
   useSwipe(handleSwipe);
   var tiles = board.tiles
     .filter(tile => tile.value != 0)
