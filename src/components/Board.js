@@ -3,6 +3,7 @@ import { Board} from '../helper'
 import TileView from './Tile';
 import Cell from './Cell';
 import useSwipe from '../hooks/useEvent';
+import backbutton from "../assets/img/back_button.svg"
 
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
@@ -50,7 +51,10 @@ const BoardView = () => {
      <div className='score-number'>{board.score}</div>
      {/* <div className='resetButton' onClick={resetGame}>Reset-Game</div> */}
      </div>
+     <div>
      {lost && <div className='game_over'>Game Over..!</div>}
+     </div>
+     <div className='back_button'><img src={backbutton} alt="back" onClick={() => alert("hi")}/></div>
     <div className='board'>
       <div>
       <span className='cell'></span>
