@@ -44,12 +44,13 @@ const BoardView = () => {
     .filter(tile => tile.value != 0)
     .map((tile,index) => <TileView tile={tile} key={index} />);
   return (
-    <div>
+    <div className='game_page'>
       <div className='details-box'>
      <div className='score-box'>SCORE</div>
      <div className='score-number'>{board.score}</div>
      {/* <div className='resetButton' onClick={resetGame}>Reset-Game</div> */}
      </div>
+     {lost && <div className='game_over'>Game Over..!</div>}
     <div className='board'>
       <div>
       <span className='cell'></span>
@@ -79,7 +80,6 @@ const BoardView = () => {
       {tiles}
      
     </div>
-    {lost && <h1>You Lost</h1>}
     </div>
   );
 }
