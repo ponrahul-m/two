@@ -7,9 +7,9 @@ import useSwipe from '../hooks/useEvent';
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
   const [lost,setLost]=useState(false);
-  const resetGame=()=>{
-    setBoard(new Board());
-  }
+  // const resetGame=()=>{
+  //   setBoard(new Board());
+  // }
   const handleSwipe = (direction) => {
     if (board.hasWon()) return;
     if(board.hasLost()){
@@ -46,8 +46,9 @@ const BoardView = () => {
   return (
     <div>
       <div className='details-box'>
-     <div className='score-box'>Score : {board.score}</div>
-     <div className='resetButton' onClick={resetGame}>Reset-Game</div>
+     <div className='score-box'>SCORE</div>
+     <div className='score-number'>{board.score}</div>
+     {/* <div className='resetButton' onClick={resetGame}>Reset-Game</div> */}
      </div>
     <div className='board'>
       <div>
