@@ -100,7 +100,7 @@ class Board {
           this.score += tile1.value + tile2.value;
         }
         resultRow[target] = targetTile;
-        this.won |= targetTile.value === 2048; //limit
+        this.won |= targetTile.value === 8192; //limit
         hasChanged |= targetTile.value !== this.cells[row][target].value; 
       }
       this.cells[row] = resultRow;

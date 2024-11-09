@@ -1,4 +1,11 @@
-
+@font-face {
+  font-family: "Gilroy";
+  src: url("../src/font/Radomir\ Tinkov\ -\ Gilroy-Black.otf");
+}
+@font-face {
+  font-family: "Gilroy medium";
+  src: url("../src/font/Radomir\ Tinkov\ -\ Gilroy-Medium.otf");
+}
 
 body {
   display: flex;
@@ -75,7 +82,7 @@ html, body {
 color: #FF365D;
 text-align: center;
 text-shadow: 0px 4px 0px #4B2C7A;
-font-family: Gilroy;
+font-family: "Gilroy";
 font-size: 45px;
 font-style: normal;
 font-weight: 900;
@@ -89,6 +96,7 @@ line-height: 100%;
   color: #9E7FCB;
 font-size: 24px;
 font-style: normal;
+font-family: "Gilroy medium";
 font-weight: 500;
 line-height: normal;
 text-transform: uppercase;
@@ -97,7 +105,7 @@ text-transform: uppercase;
 .score-number{
   color: #EADCFF;
 text-align: center;
-font-family: Gilroy;
+font-family: "Gilroy";
 font-size: 40px;
 font-style: normal;
 font-weight: 900;
@@ -188,15 +196,23 @@ line-height: 100%;
 }
 
 .tile2048 {
-  position: absolute;
-  background-size: contain;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  padding: 0px;
   color: #fff;
   background-image: url(./assets/img/2048.gif);
+  background-size: contain;
+  font-size: 35px;
+}
+
+.tile4096{
+  color: #fff;
+  background-image: url(./assets/img/4096.gif);
+  background-size: contain;
+  font-size: 35px;
+}
+
+.tile8192{
+  color: #fff;
+  background-image: url(./assets/img/8192.gif);
+  background-size: contain;
   font-size: 35px;
 }
 

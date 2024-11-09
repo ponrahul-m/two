@@ -8,11 +8,14 @@ import backbutton from "../assets/img/back_button.svg"
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
   const [lost,setLost]=useState(false);
+  const [won,setWon]=useState(false);
   // const resetGame=()=>{
   //   setBoard(new Board());
   // }
   const handleSwipe = (direction) => {
-    if (board.hasWon()) return;
+    if (board.hasWon()) {
+      setWon(true)
+    }
     if(board.hasLost()){
       setLost(true);
     }
@@ -54,7 +57,10 @@ const BoardView = () => {
      <div>
      {lost && <div className='game_over'>Game Over..!</div>}
      </div>
-     <div className='back_button'><img src={backbutton} alt="back" onClick={() => alert("hi")}/></div>
+     <div>
+     {won && <div className='game_over'>You Won..!</div>}
+     </div>
+     {/* <div className='back_button'><img src={backbutton} alt="back" onClick={() => alert("hi")}/></div> */}
     <div className='board'>
       <div>
       <span className='cell'></span>
