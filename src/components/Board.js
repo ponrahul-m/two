@@ -1,27 +1,21 @@
-import React, { useState} from 'react';
-import { Board} from '../helper'
+import React, { useState } from 'react';
+import { Board } from '../helper';
 import TileView from './Tile';
 import Cell from './Cell';
 import useSwipe from '../hooks/useEvent';
-import backbutton from "../assets/img/back_button.svg"
+import backbutton from "../assets/img/back_button.svg";
 
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
-  const [lost,setLost]=useState(false);
-  const [won,setWon]=useState(false);
-  // const resetGame=()=>{
-  //   setBoard(new Board());
-  // }
+  const [lost, setLost] = useState(false);
+  const [won, setWon] = useState(false);
+
   const handleSwipe = (direction) => {
-    if (board.hasWon()) {
-      setWon(true)
-    }
-    if(board.hasLost()){
-      setLost(true);
-    }
+    // Stop interaction if game is over
+    if (lost || won) return;
 
     let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    
+
     let newBoard;
     switch (direction) {
       case "left":
@@ -39,59 +33,59 @@ const BoardView = () => {
       default:
         return;
     }
+
     setBoard(newBoard);
+
+    // Check if player has won or lost after a move
+    if (newBoard.hasWon()) setWon(true);
+    if (newBoard.hasLost()) setLost(true);
   };
 
-
+  // Attach swipe event listener
   useSwipe(handleSwipe);
-  var tiles = board.tiles
-    .filter(tile => tile.value != 0)
-    .map((tile,index) => <TileView tile={tile} key={index} />);
+
+  // const resetGame = () => {
+  //   setBoard(new Board());
+  //   setLost(false);
+  //   setWon(false);
+  // };
+
+  const tiles = board.tiles
+    .filter(tile => tile.value !== 0)
+    .map((tile, index) => <TileView tile={tile} key={index} />);
+
   return (
     <div className='game_page'>
       <div className='details-box'>
-     <div className='score-box'>SCORE</div>
-     <div className='score-number'>{board.score}</div>
-     {/* <div className='resetButton' onClick={resetGame}>Reset-Game</div> */}
-     </div>
-     <div>
-     {lost && <div className='game_over'>Game Over..!</div>}
-     </div>
-     <div>
-     {won && <div className='game_over'>You Won..!</div>}
-     </div>
-     {/* <div className='back_button'><img src={backbutton} alt="back" onClick={() => alert("hi")}/></div> */}
-    <div className='board'>
-      <div>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      </div>
-      <div>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      </div>
-      <div>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      </div>
-      <div>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
-      <span className='cell'></span>
+        <div className='score-box'>SCORE</div>
+        <div className='score-number'>{board.score}</div>
       </div>
 
-      {tiles}
-     
-    </div>
+      {/* Overlay for game over or win */}
+      {(lost || won) && (
+        <div className='overlay'>
+          <div className='overlay-text'>
+            {lost ? 'Game Over..!' : 'You Won..!'}
+            {/* <button className='resetButton' onClick={resetGame}>
+              Restart Game
+            </button> */}
+          </div>
+        </div>
+      )}
+
+      {/* Game board */}
+      <div className='board'>
+        {[...Array(4)].map((_, row) => (
+          <div key={row}>
+            {[...Array(4)].map((_, col) => (
+              <span className='cell' key={col}></span>
+            ))}
+          </div>
+        ))}
+        {tiles}
+      </div>
     </div>
   );
-}
+};
 
 export default BoardView;
