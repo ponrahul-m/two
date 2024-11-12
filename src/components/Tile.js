@@ -20,7 +20,7 @@ const TileView = ({tile}) => {
   }
   var classes = classArray.join(' ');
   return (
-    <span className={classes}></span>
+    <span className={classes} loading="lazy"></span>
   );
 }
 
