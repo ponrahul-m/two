@@ -3,7 +3,6 @@ import { Board } from '../helper';
 import TileView from './Tile';
 import Cell from './Cell';
 import useSwipe from '../hooks/useEvent';
-import backbutton from "../assets/img/back_button.svg";
 
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
