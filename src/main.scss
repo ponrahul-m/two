@@ -256,7 +256,8 @@ line-height: 100%;
   animation-duration: 0.2s;
   animation-name: newTile;
   animation-fill-mode: forwards;
-  animation-delay: 0.15s;
+  animation-delay: 0.2s;
+  animation-timing-function: ease-out;
   transform: scale(0);
 }
 
