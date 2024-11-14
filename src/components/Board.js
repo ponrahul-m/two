@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Board } from '../helper';
 import TileView from './Tile';
 import Cell from './Cell';
@@ -8,6 +8,17 @@ const BoardView = () => {
   const [board, setBoard] = useState(new Board());
   const [lost, setLost] = useState(false);
   const [won, setWon] = useState(false);
+
+  useLayoutEffect(()=>{
+    if (window) {
+      if (window.gameloaded) {
+          window.gameloaded.postMessage("");
+          console.log('gameLoaded event sent to Flutter.');
+      } else {
+          console.error('Flutter WebView is not available.');
+      }
+  }
+  },[won,lost])
 
   const handleSwipe = (direction) => {
     // Stop interaction if game is over
@@ -52,6 +63,29 @@ const BoardView = () => {
   const tiles = board.tiles
     .filter(tile => tile.value !== 0)
     .map((tile, index) => <TileView tile={tile} key={index} />);
+
+    const scoreSend = (finalScore) => {
+      const ans = {
+        score: board.score,
+        // metadata: { word1, word2, isWordleMode },
+      };
+      const ansString = JSON.stringify(ans);
+      console.log(ansString);
+      if (window) {
+        if (window.scoreChallengeComplete) {
+          window.scoreChallengeComplete.postMessage(ansString);
+          console.log("yes");
+        } else {
+          console.error("window.scoreChallengeComplete is not defined.");
+        }
+      }
+    };
+
+    useEffect(() => {
+      if (lost || won) {
+        scoreSend();
+      }
+    }, [lost, won]);
 
   return (
     <div className='game_page'>
